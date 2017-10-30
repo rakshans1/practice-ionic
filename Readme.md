@@ -8,3 +8,4 @@ ionic serve
 
 ionic generate page pagename
 
+ionic cordova run android --device
