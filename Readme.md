@@ -9,3 +9,7 @@ ionic serve
 ionic generate page pagename
 
 ionic cordova run android --device
+
+ionic build --release android
+
+ionic cordova build
