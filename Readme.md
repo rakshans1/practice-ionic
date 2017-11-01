@@ -1,5 +1,7 @@
 npm install -g ionic cordova
 
+ionic config set -g yarn true
+
 ionic start firstapp --type=ionic-angular
 
 cd firstapp

@@ -1,3 +1,7 @@
+import { DbOptionsPage } from './../pages/db-options/db-options';
+import { AuthService } from './../services/auth';
+import { SignupPage } from '../pages/signup/signup';
+import { SigninPage } from '../pages/signin/signin';
 import { RecipeService } from './../services/recipe';
 import { ShoppingListService } from './../services/shopping-list';
 import { RecipesPage } from './../pages/recipes/recipes';
@@ -11,6 +15,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { HttpModule } from '@angular/http';
+
 import { MyApp } from "./app.component";
 
 @NgModule({
@@ -20,10 +26,14 @@ import { MyApp } from "./app.component";
     EditRecipePage,
     ShoppingListPage,
     RecipePage,
-    RecipesPage
+    RecipesPage,
+    SigninPage,
+    SignupPage,
+    DbOptionsPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -33,14 +43,18 @@ import { MyApp } from "./app.component";
     EditRecipePage,
     ShoppingListPage,
     RecipePage,
-    RecipesPage
+    RecipesPage,
+    SigninPage,
+    SignupPage,
+    DbOptionsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ShoppingListService,
-    RecipeService
+    RecipeService,
+    AuthService
   ]
 })
 export class AppModule {}

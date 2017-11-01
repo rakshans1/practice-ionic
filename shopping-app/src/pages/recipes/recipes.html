@@ -7,8 +7,20 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-only (click)="onNewRecipe()"><ion-icon name="add" color="primary"></ion-icon></button>
+      <button ion-button icon-only (click)="onNewRecipe()">
+        <ion-icon name="add" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onShowOptions($event)">
+        <ion-icon name="more" color="primary"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-title>Recipes</ion-title>
   </ion-navbar>

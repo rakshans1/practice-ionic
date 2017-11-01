@@ -1,8 +1,10 @@
-import { Ingredient } from './../../models/ingredient';
-import { ShoppingListService } from './../../services/shopping-list';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { NgForm } from '@angular/forms';
+import { DbOptionsPage } from './../db-options/db-options';
+import { AuthService } from './../../services/auth';
+import { Ingredient } from "./../../models/ingredient";
+import { ShoppingListService } from "./../../services/shopping-list";
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams, PopoverController, LoadingController, AlertController } from "ionic-angular";
+import { NgForm } from "@angular/forms";
 /**
  * Generated class for the ShoppingListPage page.
  *
@@ -12,17 +14,24 @@ import { NgForm } from '@angular/forms';
 
 @IonicPage()
 @Component({
-  selector: 'page-shopping-list',
-  templateUrl: 'shopping-list.html',
+  selector: "page-shopping-list",
+  templateUrl: "shopping-list.html"
 })
 export class ShoppingListPage {
   shoppingList: Ingredient[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private slService: ShoppingListService) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private slService: ShoppingListService,
+    private popoverCtrl: PopoverController,
+    private authService: AuthService,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ShoppingListPage');
+    console.log("ionViewDidLoad ShoppingListPage");
   }
 
   ionViewWillEnter() {
@@ -42,5 +51,62 @@ export class ShoppingListPage {
 
   private loadItems() {
     this.shoppingList = this.slService.getItems();
+  }
+
+  onShowOptions(event) {
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait'
+    });
+    const popover = this.popoverCtrl.create(DbOptionsPage);
+    popover.present({ev: event});
+    popover.onDidDismiss(data => {
+      if (!data) {
+        return;
+      }
+      if (data.action == 'load') {
+        loading.present();
+        this.authService.getActivatedUser().getToken()
+        .then(
+          token  => {
+            this.slService.getList(token)
+            .subscribe(
+              (list: Ingredient[]) => {
+                loading.dismiss();
+                if (list) {
+                  this.shoppingList = list;
+                } else {
+                  this.shoppingList = [];
+                }
+              },
+              err => this.handleError(err.json().error)
+            );
+          }
+        );
+      } else {
+        loading.present();
+        this.authService.getActivatedUser().getToken()
+        .then(
+          token  => {
+            this.slService.saveList(token)
+            .subscribe(
+              () => loading.dismiss(),
+              err => {
+                loading.dismiss();
+                this.handleError(err.message);
+              }
+            );
+          }
+        );
+      }
+    });
+  }
+
+  private handleError(error: string) {
+    const alert = this.alertCtrl.create({
+      title: 'An Error occurred!',
+      message: error,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }
