@@ -1,3 +1,4 @@
+import { AuthTabPage } from './../pages/auth-tab/auth-tab';
 import { DbOptionsPage } from './../pages/db-options/db-options';
 import { AuthService } from './../services/auth';
 import { SignupPage } from '../pages/signup/signup';
@@ -29,7 +30,8 @@ import { MyApp } from "./app.component";
     RecipesPage,
     SigninPage,
     SignupPage,
-    DbOptionsPage
+    DbOptionsPage,
+    AuthTabPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { MyApp } from "./app.component";
     RecipesPage,
     SigninPage,
     SignupPage,
-    DbOptionsPage
+    DbOptionsPage,
+    AuthTabPage
   ],
   providers: [
     StatusBar,

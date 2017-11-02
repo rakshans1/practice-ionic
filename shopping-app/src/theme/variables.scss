@@ -21,7 +21,21 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
+$font-family-base: "Roboto", sans-serif;
+$font-size-base: 15px;
 
+$tabs-background: #ffffff;
+$tabs-md-tab-font-size: 15px;
+$tabs-md-tab-font-size-active: 15px;
+$tabs-md-tab-min-height: unset;
+$tabs-tab-color-active: #003D8E;
+$tabs-md-tab-text-color: #F18E37;
+$tabs-md-tab-padding-top: 25pt;
+$tabs-md-tab-padding-bottom: 20pt;
+$tabs-md-tab-padding-end: 40pt;
+$tabs-md-tab-padding-active-top: 25pt;
+$tabs-md-tab-padding-active-bottom: 20pt;
+$tabs-md-tab-padding-active-end: 40pt;
 
 
 
@@ -34,7 +48,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #bc7e40,
+  primary:    #F18E37,
   secondary:  #7ad61d,
   danger:     #f53d3d,
   light:      #f4f4f4,

@@ -1,0 +1,8 @@
+page-auth-tab {
+  .tab-button {
+    background: #ededed;
+  }
+  .tabs-md .tab-button[aria-selected=true] {
+    background: #ffffff;
+  }
+}

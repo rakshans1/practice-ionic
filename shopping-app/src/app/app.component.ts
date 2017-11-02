@@ -1,7 +1,6 @@
+import { AuthTabPage } from './../pages/auth-tab/auth-tab';
 import { AuthService } from "./../services/auth";
 import { NavController, MenuController } from "ionic-angular";
-import { SignupPage } from "./../pages/signup/signup";
-import { SigninPage } from "./../pages/signin/signin";
 import { TabsPage } from "./../pages/tabs/tabs";
 import { Component, ViewChild } from "@angular/core";
 import { Platform } from "ionic-angular";
@@ -14,8 +13,6 @@ import firebase from "firebase";
 })
 export class MyApp {
   rootPage: any = TabsPage;
-  signinPage = SigninPage;
-  signupPage = SignupPage;
   isAuthenticated = false;
   @ViewChild("nav") nav: NavController;
 
@@ -36,7 +33,7 @@ export class MyApp {
         this.rootPage = TabsPage;
       } else {
         this.isAuthenticated = false;
-        this.rootPage = SigninPage;
+        this.rootPage = AuthTabPage;
       }
     });
     platform.ready().then(() => {
